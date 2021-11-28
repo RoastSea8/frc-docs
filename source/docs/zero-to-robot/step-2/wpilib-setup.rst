@@ -80,7 +80,7 @@ This next screen involves downloading VS Code. Unfortunately, due to licensing r
 
   - This option downloads and saves a copy of VS Code for all platforms, which is useful for sharing the copy of the installer.
 
-Go ahead and select :guilabel:`Download VS Code for Single Install`. This will begin the download process and can take a bit depending on internet connectivity (it's ~60MB). Once the download is done, select :guilabel:`Next`. You should be presented with a screen that looks similar to the one below.
+Go ahead and select :guilabel:`Download VS Code for Single Install`. This will begin the download process and can take a bit depending on internet connectivity (it's ~100MB). Once the download is done, select :guilabel:`Next`. You should be presented with a screen that looks similar to the one below.
 
 .. image:: images/wpilib-setup/installer-options.png
    :alt: An overview of the installer options
@@ -99,7 +99,7 @@ After installation is complete, you will be presented with the finished screen.
 .. image:: images/wpilib-setup/installer-finish.png
    :alt: Installer finished screen.
 
-.. important:: WPILib installs a separate version of VS Code than into an already existing installation. Each year has it's own copy of the tools appended with the year. IE: ``WPILib VS Code 2021``. Please launch the WPILib VS Code and not a system installed copy!
+.. important:: WPILib installs a separate version of VS Code than into an already existing installation. Each year has it's own copy of the tools appended with the year. IE: ``WPILib VS Code 2022``. Please launch the WPILib VS Code and not a system installed copy!
 
 Congratulations, the WPILib development environment and tooling is now installed on your computer! Press Finish to exit the installer.
 

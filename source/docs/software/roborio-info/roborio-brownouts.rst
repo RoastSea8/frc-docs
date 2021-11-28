@@ -37,6 +37,7 @@ The controller will take the following steps to attempt to preserve the battery 
 -  GPIO configured as outputs go to High-Z
 -  Relay Outputs are disabled (driven low)
 -  CAN-based motor controllers are sent an explicit disable command
+-  Pneumatic Devices such as the CTRE Pneumatics Control Module and REV Pneumatic Hub are disabled
 
 **The controller will remain in this state until the voltage rises to greater than 7.5V or drops below the trigger for the next stage of the brownout**
 
@@ -62,6 +63,23 @@ The key to avoiding a brownout condition is to proactively plan for the current 
 3. Start assigning your available current to these functions. You will likely find that you run out pretty quickly. Many teams gear their drivetrain to have enough torque to slip their wheels at 40-50A of current draw per motor. If we have 4 motors on the drivetrain, that eats up most, or even exceeds, our power budget! This means that we may need to put together a few scenarios and understand what functions can (and need to be) be used at the same time. In many cases, this will mean that you really need to limit the current draw of the other functions if/while your robot is maxing out the drivetrain (such as trying to push something). Benchmarking the "driving" current requirements of a drivetrain for some of these alternative scenarios is a little more complex, as it depends on many factors such as number of motors, robot weight, gearing, and efficiency. Current numbers for other functions can be done by calculating the power required to complete the function and estimating efficiency (if the mechanism has not been designed) or by determining the torque load on the motor and using the torque-current curve to determine the current draw of the motors.
 
 4. If you have determined mutually exclusive functions in your analysis, consider enforcing the exclusion in software. You may also use the current monitoring of the PDP (covered in more detail below) in your robot program to provide output limits or exclusions dynamically (such as don't run a mechanism motor when the drivetrain current is over X or only let the motor run up to half output when the drivetrain current is over Y).
+
+Settable Brownout
+-----------------
+
+The NI roboRIO 1.0 does not support custom brownout voltages. It is fixed at 6.3V as mentioned in Stage 2 above.
+
+The NI roboRIO 2.0 adds the option for a software settable brownout level.  The default brownout level (Stage 2) of the roboRIO 2.0 is 6.75V.
+
+.. tabs::
+
+  .. code-tab:: java
+
+    RobotController.setBrownoutVoltage(7.0);
+
+  .. code-tab:: c++
+
+    frc::RobotController::SetBrownoutVoltage(7_V);
 
 Measuring Current Draw using the PDP
 ------------------------------------

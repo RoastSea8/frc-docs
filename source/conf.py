@@ -14,13 +14,18 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import sys
+import os
+
+sys.path.append(os.path.abspath("."))
+sys.path.append(os.path.abspath("./frc-docs/source"))
 
 # -- Project information -----------------------------------------------------
 
 project = "FIRST Robotics Competition"
 copyright = "2021, FIRST and other WPILib Contributors"
 author = "WPILib"
-version = "2021"
+version = "2022"
 
 
 # -- General configuration ---------------------------------------------------
@@ -37,6 +42,7 @@ extensions = [
     "sphinxcontrib.rsvgconverter",
     "sphinxext.delta",
     "sphinxext.opengraph",
+    "sphinxext.photofinish",
     "sphinxext.rediraffe",
     "sphinxext.remoteliteralinclude",
     "sphinxext.toptranslators",
@@ -47,6 +53,12 @@ extensions = [
     "versionwarning.extension",
     "sphinx_panels",
 ]
+
+local_extensions = [
+    "_extensions.post_process",
+]
+
+extensions += local_extensions
 
 versionwarning_messages = {
     "latest": """
@@ -85,7 +97,7 @@ ogp_image = (
 # Enables ChiefDelphi support
 ogp_custom_meta_tags = [
     '<meta property="og:ignore_canonical" content="true" />',
-    '<meta name="theme-color" content="#AC2B37" />',
+    '<meta name="theme-color" content="#003974" />',
 ]
 
 # Set location of pages to be indexed by delta
@@ -110,6 +122,7 @@ linkcheck_ignore = [
     r".*andymark.com.*",
     r".*ti.com/lit/an/spma033a/spma033a.pdf.*",
     r".*wpilibpi.local.*",
+    r".*java.com/en/download/help/locale.xml.*",
 ]
 
 # Sets linkcheck timeout in seconds
@@ -129,7 +142,8 @@ templates_path = ["_templates"]
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["docs/beta/*"]
+# exclude_patterns = ["docs/beta/*"]
+exclude_patterns = ["docs/yearly-overview/2020-Game-Data.rst"]
 
 # Specify the master doc file, AKA our homepage
 master_doc = "index"
@@ -199,6 +213,9 @@ def setup(app):
 
     # Launch external links in a new tab/window
     app.add_js_file("js/external-links-new-tab.js")
+
+    # Add 2014 archive link to rtd versions menu
+    app.add_js_file("js/version-2014.js")
 
 
 # -- Options for latex generation --------------------------------------------

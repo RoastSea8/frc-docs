@@ -3,14 +3,14 @@
 Installing LabVIEW for FRC (LabVIEW only)
 =========================================
 
-.. image:: /docs/software/labview/creating-robot-programs/images/creating-building-and-loading-your-benchtop-test-program/ni-logo.png
-   :alt: The old NI logo.
-
 .. note:: This installation is for teams programming in LabVIEW or using NI Vision Assistant only. C++ and Java teams not using these features do not need to install LabVIEW and should proceed to :doc:`Installing the FRC Game Tools </docs/zero-to-robot/step-2/frc-game-tools>`.
 
 Download and installation times will vary widely with computer and internet connection specifications, however note that this process involves a large file download and installation and will likely take at least an hour to complete.
 
-.. warning:: The version of LabVIEW used for the 2021 season is the same as the version used for the 2020 season. If you already have LabVIEW installed, it does not need to be re-installed. Instead see :ref:`docs/yearly-overview/relicensing-labview:Re-licensing LabVIEW for 2021 Season` for info on re-licensing your software.
+Requirements
+------------
+
+- Windows 10 or higher (Windows 10, 11). Windows 11 is not officially supported by NI, but has been tested to work.
 
 Uninstall Old Versions (Recommended)
 ------------------------------------
@@ -63,20 +63,10 @@ Starting Install
 
      Right click on the downloaded iso file and select mount. Run install.exe from the mounted iso. Click "Yes" if a Windows Security prompt
 
-     .. note:: other installed programs may associate with iso files and the mount option may not appear. If that software does not give the option to mount or extract the iso file, then follow the directions in the "Offline Installer (Windows 7, 8, & 8.1)" tab.
+     .. note:: other installed programs may associate with iso files and the mount option may not appear. If that software does not give the option to mount or extract the iso file, then install 7-Zip and use that to extract the iso.
 
      .. image:: images/labview/mount-iso.png
       :alt: The menu after right clicking on an .iso file to choose "Mount".
-
-  .. tab:: Offline Installer (Windows 7, 8, & 8.1)
-
-     Install 7-Zip (download `here <https://www.7-zip.org>`__). As of the writing of this document, the current released version is 19.00 (2019-02-21).
-     Right click on the downloaded iso file and select Extract to.
-
-     .. image:: images/labview/extract-iso.png
-      :alt: After right clicking on the .iso file go to "7-Zip" then "Extract to....".
-
-     Run install.exe from the extracted folder. Click :guilabel:`Yes` if a Windows Security prompt appears.
 
 NI Package Manager License
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -177,27 +167,30 @@ You will be prompted whether to enable the NI update service. You can choose to 
 NI Activation Wizard
 ^^^^^^^^^^^^^^^^^^^^
 
+.. image:: images/labview/ni_activation_wizard.png
+   :alt: The NI Activation Wizard
+
+Click the :guilabel:`Log in to Activate` button.
+
 .. image:: images/labview/ni_activation_login.png
    :alt: The NI user login screen.
 
 Log into your ni.com account. If you don't have an account, select :guilabel:`Create account` to create a free account.
 
+.. image:: images/labview/ni_activation_sn_selection.png
+   :alt: Screen so select how to activate LabVIEW.
+
+From the drop-down, select enter a serial number
+
 .. image:: images/labview/ni_activation_keys.png
    :alt: Screen for entering your product key.
 
-The serial number you entered at the "User Information" screen should appear in all of the text boxes, if it doesn't, enter it now. Click "Activate".
-
-.. note:: If this is the first time activating the 2020 software on this account, you will see the message shown above about a valid license not being found. You can ignore this.
+Enter the serial number in all the boxes. Click :guilabel:`Activate`.
 
 .. image:: images/labview/ni_activation_success.png
    :alt: Screen details the activation success of each package.
 
-If your products activate successfully, an "Activation Successful" message will appear. If the serial number was incorrect, it will give you a text box and you can re-enter the number and select :guilabel:`Try Again`. The items shown above are not expected to activate. If everything activated successfully, click :guilabel:`Next`.
-
-.. image:: images/labview/ni_activation_finish.png
-   :alt: Close through this screen asking you to register.
-
-Click "Close".
+If your products activate successfully, an "Activation Successful" message will appear. If the serial number was incorrect, it will give you a text box and you can re-enter the number and select :guilabel:`Try Again`. The items shown above are not expected to activate. If everything activated successfully, click :guilabel:`Finish`.
 
 Restart
 ^^^^^^^

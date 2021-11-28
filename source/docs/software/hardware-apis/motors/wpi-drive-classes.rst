@@ -104,9 +104,9 @@ Axis Conventions
    :alt: Show the axis of the robot with X+ going forward.  Y+ to the right and Z+ downward.
    :width: 600
 
-This library uses the NED axes convention (North-East-Down as external reference in the world frame). The positive X axis points ahead, the positive Y axis points right, and the positive Z axis points down. Rotations follow the right-hand rule, so clockwise rotation around the Z axis is positive.
+The drive classes use the NED axes convention (North-East-Down as external reference in the world frame). The positive X axis points ahead, the positive Y axis points right, and the positive Z axis points down. The rest of the library, and math in general, uses NWU axes convention (North-West-Up). We use NED here because joysticks use NED, and they use NED because the aviation industry does.
 
-.. warning:: This convention is different than the convention for joysticks which typically have -Y as Up (commonly mapped to throttle) and +X as Right. Pay close attention to the examples below if you want help with typical Joystick->Drive mapping.
+Joysticks follow NED convention, but it's important to note that axes values are rotations around the respective axes, not translations. When viewed with each axis pointing toward you, CCW is a positive value and CW is a negative value. Pushing forward on the joystick is a CW rotation around the Y axis, so you get a negative value. Pushing to the right is a CCW rotation around the X axis, so you get a positive value.
 
 Using the DifferentialDrive class to control Differential Drive robots
 ----------------------------------------------------------------------
@@ -150,10 +150,10 @@ DifferentialDrive is a method provided for the control of "skid-steer" or "West 
 
 
 
-Multi-Motor DifferentialDrive with SpeedControllerGroups
+Multi-Motor DifferentialDrive with MotorControllerGroups
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Many FRC\ |reg| drivetrains have more than 1 motor on each side. In order to use these with DifferentialDrive, the motors on each side have to be collected into a single SpeedController, using the SpeedControllerGroup class. The examples below show a 4 motor (2 per side) drivetrain. To extend to more motors, simply create the additional controllers and pass them all into the SpeedController group constructor (it takes an arbitrary number of inputs).
+Many FRC\ |reg| drivetrains have more than 1 motor on each side. In order to use these with DifferentialDrive, the motors on each side have to be collected into a single MotorController, using the MotorControllerGroup class. The examples below show a 4 motor (2 per side) drivetrain. To extend to more motors, simply create the additional controllers and pass them all into the MotorController group constructor (it takes an arbitrary number of inputs).
 
 .. tabs::
 
@@ -164,11 +164,11 @@ Many FRC\ |reg| drivetrains have more than 1 motor on each side. In order to use
             public class Robot {
                 Spark m_frontLeft = new Spark(1);
                 Spark m_rearLeft = new Spark(2);
-                SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
+                MotorControllerGroup m_left = new MotorControllerGroup(m_frontLeft, m_rearLeft);
 
                 Spark m_frontRight = new Spark(3);
                 Spark m_rearRight = new Spark(4);
-                SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
+                MotorControllerGroup m_right = new MotorControllerGroup(m_frontRight, m_rearRight);
                 DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
 
                 public void robotInit() {
@@ -183,11 +183,11 @@ Many FRC\ |reg| drivetrains have more than 1 motor on each side. In order to use
                 public:
                     frc::Spark m_frontLeft{1};
                     frc::Spark m_rearLeft{2};
-                    frc::SpeedControllerGroup m_left{m_frontLeft, m_rearLeft};
+                    frc::MotorControllerGroup m_left{m_frontLeft, m_rearLeft};
 
                     frc::Spark m_frontRight{3};
                     frc::Spark m_rearRight{4};
-                    frc::SpeedControllerGroup m_right{m_frontRight, m_rearRight};
+                    frc::MotorControllerGroup m_right{m_frontRight, m_rearRight};
 
                     frc::DifferentialDrive m_drive{m_left, m_right};
 

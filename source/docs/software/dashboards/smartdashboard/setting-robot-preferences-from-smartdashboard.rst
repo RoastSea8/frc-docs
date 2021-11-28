@@ -1,7 +1,7 @@
 Setting Robot Preferences
 =========================
 
-The Robot Preferences (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/Preferences.html>`__, `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/release/cpp/classfrc_1_1Preferences.html>`__) class is used to store values in the flash memory on the roboRIO. The values might be for remembering preferences on the robot such as calibration settings for potentiometers, PID values, etc. that you would like to change without having to rebuild the program. The values can be viewed on the SmartDashboard and read and written by the robot program.
+The Robot Preferences (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/wpilibj/Preferences.html>`__, `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_preferences.html>`__) class is used to store values in the flash memory on the roboRIO. The values might be for remembering preferences on the robot such as calibration settings for potentiometers, PID values, etc. that you would like to change without having to rebuild the program. The values can be viewed on the SmartDashboard and read and written by the robot program.
 
 Reading and Writing Preferences
 -------------------------------
@@ -18,9 +18,8 @@ Reading and Writing Preferences
       double armDownPosition;
 
       public void robotInit() {
-        prefs = Preferences.getInstance();
-        armUpPosition = prefs.getDouble("ArmUpPosition", 1.0);
-        armDownPosition = prefs.getDouble("ArmDownPosition", 4.);
+        armUpPosition = Preferences.getDouble("ArmUpPosition", 1.0);
+        armDownPosition = Preferences.getDouble("ArmDownPosition", 4.);
       }
     }
 
@@ -34,9 +33,8 @@ Reading and Writing Preferences
       double armDownPosition;
 
       public void RobotInit() {
-        prefs = frc::Preferences::GetInstance();
-        armUpPosition = prefs->GetDouble("ArmUpPosition", 1.0);
-        armDownPosition = prefs->GetDouble("ArmDownPosition", 4.);
+        armUpPosition = frc::Preferences::GetDouble("ArmUpPosition", 1.0);
+        armDownPosition = frc::Preferences::GetDouble("ArmDownPosition", 4.);
       }
     }
 

@@ -13,7 +13,7 @@ There are two primary types of ultrasonics supported natively by WPILib:
 Ping-response ultrasonics
 -------------------------
 
-The :code:`Ultrasonic` class (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj/Ultrasonic.html>`__, `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/release/cpp/classfrc_1_1Ultrasonic.html>`__) provides support for ping-response ultrasonics.  As ping-response ultrasonics (per the: name) require separate pins for both spending the ping and measuring the response, users must specify DIO pin numbers for both output and input when constructing an :code:`Ultrasonic` instance:
+The :code:`Ultrasonic` class (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/wpilibj/Ultrasonic.html>`__, `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_ultrasonic.html>`__) provides support for ping-response ultrasonics.  As ping-response ultrasonics (per the: name) require separate pins for both spending the ping and measuring the response, users must specify DIO pin numbers for both output and input when constructing an :code:`Ultrasonic` instance:
 
 .. tabs::
 
@@ -34,7 +34,7 @@ It is highly recommended to use ping-response ultrasonics in "automatic mode," a
     .. code-tab:: java
 
         // Starts the ultrasonic sensor running in automatic mode
-        ultrasonic.setAutomaticMode(true);
+        Ultrasonic.setAutomaticMode(true);
 
     .. code-tab:: c++
 
@@ -70,15 +70,15 @@ Ultrasonic sensors are very useful for determining spacing during autonomous rou
         Spark right1 = new Spark(2);
         Spark right2 = new Spark(3);
 
-        SpeedControllerGroup leftMotors = new SpeedControllerGroup(left1, left2);
-        SpeedControllerGroup rightMotors = new SpeedControllerGroup(right1, right2);
+        MotorControllerGroup leftMotors = new MotorControllerGroup(left1, left2);
+        MotorControllerGroup rightMotors = new MotorControllerGroup(right1, right2);
 
         DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
         @Override
         public void robotInit() {
             // Start the ultrasonic in automatic mode
-            ultrasonic.setAutomaticMode(true);
+            Ultrasonic.setAutomaticMode(true);
         }
 
         @Override
@@ -102,8 +102,8 @@ Ultrasonic sensors are very useful for determining spacing during autonomous rou
         frc::Spark right1{2};
         frc::Spark right2{3};
 
-        frc::SpeedControllerGroup leftMotors{left1, left2};
-        frc::SpeedControllerGroup rightMotors{right1, right2};
+        frc::MotorControllerGroup leftMotors{left1, left2};
+        frc::MotorControllerGroup rightMotors{right1, right2};
 
         frc::DifferentialDrive drive{leftMotors, rightMotors};
 
