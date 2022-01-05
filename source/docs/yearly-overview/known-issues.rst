@@ -8,21 +8,12 @@ This article details known issues (and workarounds) for FRC\ |reg| Control Syste
 Open Issues
 -----------
 
-Failed to change IP Address in Radio Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Onboard I2C Causing System Lockups
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Issue**
+**Issue:** Use of the onboard I2C port, in any language, can result in system lockups. The frequency of these lockups appears to be dependent on the specific hardware (i.e. different roboRIOs will behave differently) as well as how the bus is being used.
 
-The following error message may appear when configuring the radio ``Bridge configuration failed: Failed to change IP Address...``. This is due to a change in behavior in java versions 8u291 and 11.0.11.
-
-**Workaround**
-
-Install Java from the `WPILib 2020.3.2 installer <https://github.com/wpilibsuite/allwpilib/releases/tag/v2020.3.2>`__ . It is only necessary to install the Java JDK/JRE as shown below. The radio tool will use this version instead of any other system installed versions of java. This will take approximately 600 mb of disk space.
-
-.. Note:: As the radio tool is unchanged from 2020, it will use the WPILib java installation from 2020, not 2021, so it is necessary to use the 2020 installer.
-
-.. image:: images/known-issues/java-installation.png
-  :alt: WPILib 2020.3.2 installer showing only Java JDK/JRE checked.
+**Workaround:** The only surefire mitigation is to use the MXP I2C port instead. Acessing the device less frequently and/or using a different roboRIO may significantly reduce the likelihood/frequency of lockups, it will be up to each team to assess their tolerance of the risk of lockup. This lockup can not be definitively identified on the field and a field fault will not be called for a match where this behavior is believed to occur. This lockup is a CPU/kernel hang, the roboRIO will completely stop responding and will not be accessible via the DS, webpage or SSH. If you can access your roboRIO via any of these methods, you are experiencing a different issue.
 
 Invalid build due to missing GradleRIO
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -65,10 +56,14 @@ C++ Intellisense - Files Open on Launch Don't Work Properly
   #. Wait ~1 min
   #. Open the main cpp file (not a header file). Intellisense should now be working
 
-SmartDashboard and Simulation fail to launch on Windows N Editions
+Issues with WPILib Dashboards and Simulation on Windows N Editions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Issue:** WPILib code using CSCore (dashboards and simulated robot code) will fail to launch on Education N editions of Windows.
+**Issue:** WPILib code using CSCore (dashboards and simulated robot code) will have issues on Education N editions of Windows.
+
+- Shuffleboard will run, but not load cameras
+- Smartdashbard will crash on start-up
+- Robot Simulation will crash on start-up
 
 **Solution:** Install the `Media Feature Pack <https://www.microsoft.com/en-us/software-download/mediafeaturepack>`__
 

@@ -31,7 +31,7 @@ General Library
 - Added C++ TankDrive example
 - Added ``PS4Controller`` controller class
 - Added better message for when an I2C port is out of range
-- Added ``Debouncer`` (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/wpilibj/Debouncer.html>`__/ `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_debouncer.html>`__) class. This helps with filtering rising and falling edges when dealing with boolean values
+- Added ``Debouncer`` (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/math/filter/Debouncer.html>`__, `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_debouncer.html>`__) class. This helps with filtering rising and falling edges when dealing with boolean values
 - Added ``PneumaticHub`` class for use with the REV Pneumatic Hub
 - GenericHID has been updated to static functions to use for non-defined controller types.
 - ``XboxController`` has migrated away from taking arguments in functions and instead has functions with no arguments. An example conversion is below:
@@ -40,6 +40,9 @@ General Library
 
 -  ``getInstance()`` functions in ``CameraServer``, ``DriverStation``, ``LiveWindow``, ``Preferences``, ``SendableRegistry``, have been deprecated and replaced with static functions
 - ``Timer::HasPeriodPassed()`` and ``Timer.hasPeriodPassed()`` have been deprecated. Use ``AdvanceIfElapsed()`` instead
+- Several new classes have been added to enable simpler access to ``Counter``: ``ExternalDirectionCounter`` (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/wpilibj/counter/ExternalDirectionCounter.html>`__/ `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_external_direction_counter.html>`__), ``Tachometer`` (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/wpilibj/counter/Tachometer.html>`__/ `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_tachometer.html>`__), and ``UpDownCounter`` (`Java <https://first.wpi.edu/wpilib/allwpilib/docs/development/java/edu/wpi/first/wpilibj/counter/UpDownCounter.html>`__/ `C++ <https://first.wpi.edu/wpilib/allwpilib/docs/development/cpp/classfrc_1_1_up_down_counter.html>`__)
+- ``DutyCycleEncoder``: add support for setting duty cycle range
+- Added ``ADIS16448_IMU`` and ``ADIS16470_IMU`` classes.
 
 Breaking Changes
 ^^^^^^^^^^^^^^^^
@@ -65,38 +68,7 @@ Breaking Changes
 - C++: ``frc::filesystem`` methods have been simplified to return ``std::string``, rather then using a pointer parameter
 - C++: ``wpi::math`` is replaced with ``wpi::numbers`` which is based on C++20 ``std::numbers``.
 - C++: Support for ``std::cout`` was removed from units because ``<iostream>`` has significant compile-time overhead. Use `fmtlib <https://fmt.dev/latest/index.html>`__ instead, an analog for C++20's ``std::format()`` (e.g., ``fmt::print("{}", 2_m)``). The units headers automatically include fmtlib. If you still want to use ``std::cout``, call ``value()`` on the variable being printed (e.g., ``std::cout << velocity.value()``).
-
-.. dropdown:: Various C++ classes have migrated to use units. Below are a list of effected classes.
-
-   - ``Ultrasonic``
-   - ``CommandScheduler``
-   - ``CommandState``
-   - ``WaitUntilCommand``
-   - ``MecanumControllerCommand``
-   - ``RamseteCommand``
-   - ``SwerveControllerCommand``
-   - ``TrapezoidProfileCommand``
-   - ``WaitCommand``
-   - ``Command`` (Old Commands)
-   - ``CommandGroup`` (Old Commands)
-   - ``CommandGroupEntry`` (Old Commands)
-   - ``TimedCommand`` (Old Commands)
-   - ``WaitCommand`` (Old Commands)
-   - ``WaitForChildren`` (Old Commands)
-   - ``WaitUntilCommand`` (Old Commands)
-   - ``Counter``
-   - ``CounterBase``
-   - ``DriverStation``
-   - ``Encoder``
-   - ``InterruptableSensorBase``
-   - ``MotorSafety``
-   - ``Notifier``
-   - ``SPI``
-   - ``SerialPort``
-   - ``SlewRateLimiter``
-   - ``Solenoid``
-   - ``Timer``
-   - ``Watchdog``
+- C++: Various classes have migrated to use units: ``Ultrasonic``, ``CommandScheduler``, ``CommandState``, ``WaitUntilCommand``, ``MecanumControllerCommand``, ``RamseteCommand``, ``SwerveControllerCommand``, ``TrapezoidProfileCommand``, ``WaitCommand``, ``Counter``, ``CounterBase``, ``DriverStation``, ``Encoder``, ``InterruptableSensorBase``, ``MotorSafety``, ``Notifier``, ``SPI``, ``SerialPort``, ``SlewRateLimiter``, ``Solenoid``, ``Timer``, ``Watchdog``, and Old Commands: ``Command``, ``CommandGroup``, ``CommandGroupEntry``, ``TimedCommand``, ``WaitCommand``, ``WaitForChildren``, ``WaitUntilCommand``
 
 Package Renames
 ~~~~~~~~~~~~~~~
@@ -106,7 +78,7 @@ We have committed to several organizational renames that will allow us greater f
 - Several packages moved from ``wpilibj`` to ``math``: ``controller``, ``estimator``, ``geometry``, ``kinematics``, ``math``, ``spline``, ``system``, ``trajectory``
 - ``wpiutil.math`` was moved to ``math``
 - ``wpiutil`` is now ``util``
-- ``SlewRateLimiter``, ``LinearFilter``, and ``MedianFilter`` now live in ``math.filters``
+- ``SlewRateLimiter``, ``LinearFilter``, and ``MedianFilter`` now live in ``math.filters``, along with the newly-added ``Debouncer``.
 - ``Timer`` has moved from ``frc2`` to ``frc``
 - Motor controllers (``VictorSPX``, ``PWMSparkMax``, etc) have been moved to a ``motorcontrol`` package.
 - ``edu.wpi.cscore`` has moved to ``edu.wpi.first.cscore``
@@ -114,7 +86,7 @@ We have committed to several organizational renames that will allow us greater f
 Simulation
 ----------
 
-- No new changes
+- Uses multi-file ``json`` save formats instead of ``ini`` and supports loading/saving the workspace; when started from the VS Code tool menu, these default to using the project directory for saving rather than the system-global location
 
 Shuffleboard
 ------------
@@ -127,6 +99,7 @@ Shuffleboard
 - Add tab clear confirmation
 - Save widget titles display mode preference
 - Fix: CameraServer streams
+- Fix: Shuffleboard not starting on Windows N. `Media Feature Pack <https://www.microsoft.com/en-us/software-download/mediafeaturepack>`__ is still needed for camera support.
 
 SmartDashboard
 --------------
@@ -136,7 +109,7 @@ SmartDashboard
 Glass
 -----
 
-- No new changes
+- Uses multi-file ``json`` save formats instead of ``ini`` and supports loading/saving the workspace; when started from the VS Code tool menu, these default to using the project directory for saving rather than the system-global location
 
 Axon
 ----
@@ -155,7 +128,7 @@ PathWeaver
 GradleRIO
 ---------
 
-- Gradle has been updated to version 7.2
+- Gradle has been updated to version 7.3.2
 - Internals of GradleRIO have been updated to be easier to read, more maintainable and easier for advanced teams to modify.
 - Deployment is more customizable
 
@@ -174,9 +147,12 @@ OutlineViewer has been updated to be C++ based using the ImGui library. This mak
 WPILib All in One Installer
 ---------------------------
 
-- Visual Studio Code has been updated to 1.62
+- Simplified installation choices
+- Visual Studio Code has been updated to 1.63.2
 - Updated Java and C++ language extensions
 - Fix Linux desktop icon permissions
+- Add year to tools shortcuts name
+- Handle issues with JDK running and UAC canceled
 
 Visual Studio Code Extension
 ----------------------------

@@ -28,9 +28,9 @@ If at any point in time you want to disable Desktop Support, simply re-run the "
 Additional C++ Dependency
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-C++ robot simulation requires that a native compiler to be installed. For Windows, this would be `Visual Studio 2019 <https://visualstudio.microsoft.com/vs/>`__ (**not** VS Code), macOS requires `Xcode <https://apps.apple.com/us/app/xcode/id497799835>`__, and Linux (Ubuntu) requires the ``build-essential`` package.
+C++ robot simulation requires that a native compiler to be installed. For Windows, this would be `Visual Studio 2022 or 2019 <https://visualstudio.microsoft.com/vs/>`__ (**not** VS Code), macOS requires `Xcode <https://apps.apple.com/us/app/xcode/id497799835>`__, and Linux (Ubuntu) requires the ``build-essential`` package.
 
-Ensure the ``Desktop Development with C++`` option is checked in the Visual Studio installer for simulation support.
+Ensure the :guilabel:`Desktop Development with C++` option is checked in the Visual Studio installer for simulation support.
 
 .. image:: images/vs-build-tools.png
    :alt: Screenshot of the Visual Studio build tools option
@@ -52,7 +52,7 @@ Your console output in Visual Studio Code should look like the below. However, t
    Default disabledPeriodic() method... Override me!
    Default robotPeriodic() method... Override me!
 
-.. important:: Simulation can also be run outside of VS Code using ``./gradlew simulateJava``. It's important to note that C++ simulation is not available through command-line at this time.
+.. important:: Simulation can also be run outside of VS Code using ``./gradlew simulateJava`` for Java or ``./gradlew simulateNative`` for C++.
 
 Running Robot Dashboards
 ------------------------
